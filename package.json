@@ -1,0 +1,11 @@
+{
+  "name": "erodha",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ERODHA — Quantitative Equity Forecasting & Jump-Diffusion Risk Engine",
+  "scripts": {
+    "dev": "npm --prefix legacy_prototype run dev -- --host 127.0.0.1 --port 5173",
+    "build": "npm --prefix legacy_prototype run build",
+    "preview": "npm --prefix legacy_prototype run preview"
+  }
+}

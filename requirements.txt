@@ -1,0 +1,19 @@
+# Numerical & Quantitative Core
+numpy>=2.0.0
+pandas>=2.2.0
+scipy>=1.14.0
+
+# Market Data
+yfinance>=0.2.40
+requests>=2.31.0
+
+# Backend & REST API
+django>=5.0.0
+djangorestframework>=3.15.0
+
+# Frontend & Visualization
+streamlit>=1.35.0
+plotly>=5.20.0
+
+# Automated Testing
+pytest>=8.0.0
