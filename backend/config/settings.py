@@ -3,6 +3,7 @@ Django settings for Erodha Backend.
 """
 
 from pathlib import Path
+import os
 import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,11 +13,12 @@ PROJECT_ROOT = BASE_DIR.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-SECRET_KEY = 'django-insecure-erodha-quant-platform-key-development'
+# Local development defaults; override with environment variables in production (Render).
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-erodha-quant-platform-key-development')
 
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',') if h.strip()]
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,3 +90,10 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
     ],
 }
+
+# Serve the built React dashboard (web/dist) from the same Django service.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+_REACT_DIST = PROJECT_ROOT / 'web' / 'dist'
+if _REACT_DIST.exists():
+    WHITENOISE_ROOT = _REACT_DIST
+    WHITENOISE_INDEX_FILE = True

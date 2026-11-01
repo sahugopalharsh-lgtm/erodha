@@ -4,7 +4,9 @@ Erodha API Views
 Django REST Framework view handlers for stochastic forecasting and risk assessment.
 """
 
+import os
 import time
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -39,9 +41,9 @@ class HealthCheckView(APIView):
             "service": "Erodha Quantitative Backend",
             "version": "0.1.0",
             "quant_engine": "operational",
-            "environment": "development",
+            "environment": "development" if settings.DEBUG else "production",
             "activeDataProvider": "yfinance",
-            "demoFallbackEnabled": True,
+            "demoFallbackEnabled": os.environ.get("ERODHA_ALLOW_SYNTHETIC", "0") == "1",
             "uptimeSeconds": int(time.time() - _STARTED_AT),
         }, status=status.HTTP_200_OK)
 

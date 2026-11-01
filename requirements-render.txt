@@ -1,0 +1,10 @@
+# Lean dependency list for hosting (no Streamlit / pytest)
+numpy>=2.0.0
+pandas>=2.2.0
+scipy>=1.14.0
+yfinance>=0.2.40
+requests>=2.31.0
+django>=5.0.0
+djangorestframework>=3.15.0
+whitenoise>=6.6.0
+gunicorn>=22.0.0

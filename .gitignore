@@ -65,3 +65,8 @@ Thumbs.db
 
 # Legacy archive
 legacy_prototype/
+
+# Keep the pre-built React app so hosting needs no Node build
+!web/dist/
+!web/dist/**
+web/node_modules/

@@ -17,3 +17,7 @@ plotly>=5.20.0
 
 # Automated Testing
 pytest>=8.0.0
+
+# Hosting
+whitenoise>=6.6.0
+gunicorn>=22.0.0

@@ -68,17 +68,23 @@ python backend/manage.py runserver 127.0.0.1:8000
 - API Health Check: `http://127.0.0.1:8000/api/health/`
 - API Market Data: `http://127.0.0.1:8000/api/market-data/?symbol=AAPL`
 
-### 3. (Optional, legacy) React prototype — NOT part of this package
-The React prototype is archived separately in `legacy_prototype/` and is not required. The Streamlit dashboard below is the primary UI.
-
-### 3b. Previous React instructions
+### 3. Start the React dashboard (modern UI, real data)
+Needs Node.js 18+. First time only:
+```powershell
+cd web
+npm install
+cd ..
+```
+Then (backend must be running on port 8000):
 ```powershell
 npm run dev
 ```
-- Open your browser at: **`http://localhost:5173`**
-- Features: Full dark mode aesthetic, Merton Jump-Diffusion simulation, Monte Carlo path projection charts, interactive confidence cones, live stock analytics for Indian equities.
+- Open **http://127.0.0.1:5173**
+- The UI calls `/api/v1/*` (proxied to Django). All numbers come from `quant_engine` + Yahoo Finance.
+- There is **no mock fallback**: if the backend or data fails, the UI shows an error instead of fake numbers.
+- The landing-page hero chart and the "Understand the Model" interactive chart are schematic illustrations, labelled as such.
 
-### 4. Alternative Streamlit Dashboard
+### 4. Alternative: Streamlit dashboard
 ```powershell
 streamlit run frontend/app.py --server.port 8501
 ```
